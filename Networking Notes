@@ -1,1 +1,67 @@
 Networking Pre Study
+
+
+blue space all friendlies, mapping and networkinginto red space which is the opposition.
+
+    ##FUNDAMENTALS
+
+Binary     Hex     Decimal
+
+
+packets, headers, and their sizes:
+32 bits is known as a word
+4 bytes make up a word ( 4 bytes in an ip4v address)
+first byte in an ip header length is 45
+double word 64 bits
+quad word 128 bits
+
+if you see base 64 try to decode it
+only reason for base 64 here is encode or decode.
+
+Encapsulation and decapsulation
+
+please do not throw sausage pizza way ( pdntspa )
+
+sox proxy is used to maintain and push protocols through an established session
+proces includes stripping and adding info to packet header in order to tell where it is going.
+
+Layer 1 PHYSICAL
+Layer 2 DATA LINK Layer (arp, vlan, and ethernet)
+    -sublayers  (MAC media access control (layer 2 to layer 1) and LLC Logical Link Control)
+    -switch looks at just the destination mac to send it out faster only looking at 6 bytes compared to looking at 14 bytes ( cut through forwarding)
+  -if you see hex dd hex ipv6, if you see hex 8100 it will be standard vlan tag, hex 88a8 nonstandard vlan tag 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
