@@ -31,8 +31,67 @@ Layer 2 DATA LINK Layer (arp, vlan, and ethernet)
     -switch looks at just the destination mac to send it out faster only looking at 6 bytes compared to looking at 14 bytes ( cut through forwarding)
   -if you see hex dd hex ipv6, if you see hex 8100 it will be standard vlan tag, hex 88a8 nonstandard vlan tag 
 
+arp used for ip to mac
+proxy arp - if router has ip address then router will respond with its mac address
+gratuitous arp attack - poison arp cache by sending out a specific malicious host repetitively till something is sent back.
+Command: arp -a (shows arp cache) or 'ip neighbor'
+
+IPV4 Header:
+DSCP field determines what type of traic it is such as voice (ECN field at tht end is meant for traffic congestion)
+Value for DSCP field is the normal value times 4
+linux 64
+windows 128
+cisco 254
+
+Fragmentation Process:
+RES DF MF |   Offset
+offset changes by taking the data value and divding by 8
+for the value defragged will keep adding for what the main value was divided by 
+
+IPV6 Header:
+
+trafic class portion is similar to the dscp field
+flow level will tell the which packets need to stay on the same path such as high priority information
+hop limit is the same thing as ttl
+
+ICMP Header:
+
+all part of layer 3
 
 
+Zero Configuration Networking:
+
+Ipv4 auto configuration
+-APIPA
+-RFC 3927 
+IPv6 auto ocnfiguration
+-SLAAC (stateless address auto-config)
+-RFC 4862
+
+Transport Layer (4):
+
+TCP and UDP
+
+TCP Flags :
+CWR, ECE, URG, ACK, PSH, RST, SYN, FIN
+Collection of Exceptionally Unskilled Attackers Pester Real Security Folks
+(Three Way Handshake)
+
+UDP Headers:
+
+Source, destination, length, checksum each 16 bits
+no standardized response through udp
+Femeral ports: femeral high port means temporrily open ( short lived only open the amount of time you need to use them)
+
+Session Layer(5):
+Socks, NetBIOS, PPTP/L2TP, RPC
+                    ^
+                VPN Protocol
+Socks is used for client server exchange messages
+
+Presentation Layer(6):
+translation, formating, encoding, encryption, compression
+This layer is for providing information to the user or system in order to coherently run things.
 
 
 
