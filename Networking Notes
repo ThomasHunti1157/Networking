@@ -161,6 +161,33 @@ RFC: white paper about howa protocol works. (standardized throughout the industr
 Administrative distance
 -how routers rank the trustworthiness of a route (the higher the ranking the more trust)
 
+Static routing: literally putting in you get ot such and such network through a given host out of a given port (have to setup oth sides of it)
+advantages: no update sent, no bandwidth to use, data path is predetermined
+disadvantages: time consuming, administrator must intervene to fix, does not scale for large networks
+
+Dynamic routing: different kinds of routing protocols, typically see distance vector (how far does this traffic have to travel) (Ripv2 EIGRP)
+advantages: easy to configure automatically provide updates, intervention not needed, scales very well
+
+IGP and EGP:
+BGP uses autanomous systems
+border router in between to translate data
+
+IANA world system through internet breaks up into different terrains such as ARIN (U.S. IP's)
+
+IEEE controls creation of protocols we typically use lan wifi ethernet etc...
+
+Link state convergence determines the best path to follow and everything goes with that compared to distcne vecotr where not every router knows every route.
+link state they all commnicate with each other and deterine the best path and state.
+
+BGP:
+road map of the internet
+routes between an AS
+only cares about shorter routes
+
+can cause bgp hijacking for illegitimate advertsiing of addresses.
+
+BGP encryption and find hijacking by change of ttl of incoming packets has occured. 23 hops becomes 5 hops is suspicious.
+
 
 
 
