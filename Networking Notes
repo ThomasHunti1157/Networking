@@ -93,11 +93,53 @@ Presentation Layer(6):
 translation, formating, encoding, encryption, compression
 This layer is for providing information to the user or system in order to coherently run things.
 
+S. IP = 192.168.14.2
 
+filter for source ip 
 
+ip[2:4] = "192.168.14.2"
 
+ip[2:4] = 0xC0 0xA8 0x0E 0x02
 
+ip src = 192.168.14.2
 
+answer: ip[12:4] & 0xFFFFFFFF = 0xC0A80E02
+
+Layer 2 switching technologies:
+
+switch operation: 
+fast forward ( only destination MAC ), fragment free( First 64 bytes ), store and forward( Entire Frame and FCS )
+
+Fast Forward is most commonly seen
+
+CAM TABLE 
+
+IEEE 802.1AD "Q-in-Q"
+double tagging  0x88A80002                 followed by  \    0x81000064
+non standard double tagging 0x91000002     followed by  /
+
+Spanning tree protocol:
+Root descision process
+
+1. elect root bridge
+2. identify the root ports on non root bridge
+3. identify the designated port for each segment
+4. set alternate ports to blocking gate
+
+helps with a broadcast storms hitting all switches causing duplicate packets being forwarded out of every port.
+'one packet forwared till switches crash'
+spanning tree protocol doesnt allow this forwarding
+ports going to the router are brute ports.
+
+Layer 2 discovery protocols:
+cisco discovery protocol (CDP)
+foundry discovery protocol (FDP)
+link layer discovery protocol(LLDP)
+
+DTP dynamic trunking protocol:
+different kinds of switch ports (access port and trunk port)
+trunk ports: help switches transmit vlans to each other, are for devices that need to be aware of vlans being passed. not typically hosts
+access ports: hosts have access ports, dont need to know their part of a vlan, 
 
 
 
