@@ -295,6 +295,126 @@ To view your IP address and interface information:
             nc -lvp 1234 > file
 
 
+##PACKET CREATION AND SOCKET COMMUNICATION
+
+Different kinds: 
+stream sockets: connection oriented data (pcp)
+datagram socets: connectionless (udp)
+raw sockets: crafting all headers you need putting data directly on the wire (sending very specific data)
+
+* sockets arent just for networking
+
+User Space Sockets -system calls
+
+        -Stream Sockets
+
+        -Datagram Sockets
+
+Kernel Space Sockets -operate directly with hardware (commonly require sudo with the run access permission)
+
+        -Raw Sockets
+
+PYTHON##
+Libraries
+-import socket
+  s = socket.socket(socket.FAMILY, socket.TYPE, socket.PROTOCOL)
+        socket.socket([*family*[,*type*[*proto*]]])
+        family constants should be: AF_INET (default), AF_INET6, AF_UNIX    
+
+        type constants should be: SOCK_STREAM (default), SOCK_DGRAM, SOCK_RAW
+
+        proto constants should be: 0 (default), IPPROTO_RAW
+
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#this can also be accomplished by using s = socket.socket() due to AF_INET and SOCK_STREAM being defaults
+
+ipaddr = '127.0.0.1'
+port = 54321
+
+s.connect((ipaddr, port))
+
+# to send a string as a bytes-like object, add the prefix b to the string. \n is used to go to the next line. (Like hitting enter)
+s.send(b'Hello\n')
+
+# It is recommened that the buffer size used with recvfrom is a power of 2 and not very large
+response, conn = s.recvfrom(1024)
+
+#in order to receive a message that is sent as a bytes-like object, you must decode it into UTF-8 (default)
+print (response.decode())
+
+
+s.close()
+
+
+DATAGRAM SOCKET
+
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+ipaddr = '127.0.0.1'
+port = 54321
+
+s.sendto(b'Hello\n', (ipaddr, port))
+
+response, conn = s.recvfrom(1024)
+
+print(response.decode())
+
+##RAW SOCKET
+
+import socket
+
+# for system level cvommands
+import sys
+
+# lib for establishing packet structure (allows direct access)
+
+from struct import *
+
+# create socket
+
+try:
+        sys.exit()
+        s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_RAW)
+
+except socket.error as msg:
+        print(msg)
+
+packet = ''
+
+src_ip = '10.0=1.0.2'
+dst_ip = '10.3.0.2'
+
+# header info
+
+ip_ver_ihl = 69     #decimal conversion of 0x45 for version and IHL
+ip_tos = 0          #combination of DSCP and ECN Fields
+ip_len = 0          #kernel will fill in the acgtual length of the field
+ip_id = 12345       #sets ip id for the packet
+ip_frag = 0         #sets ip fragmentation off
+ip_ttl = 64         #determines the TTL of the packet when leaving the machine
+ip_proto = 16       #set chos protocol. if tcp (6_ or udp (17) additional headers would be required.
+ip_check = 0        #kernel will fill in the checksum for the packet
+ip_srcadd = socket.inet_aton(src_ip)    #convert src ip to 32 bit binary number
+ip_dstadd = socket.inet_aton(dst_ip)    #convert dst ip to 32 bit binary number
+
+ip_header = pack('!BBHHHBBH4s4s', ip_ver_ihl, ip_tos, ip_len, ip_id, ip_frag, ip_ttl, ip_proto, ip_check, ip_srcadd, ip_dstadd)
+
+message = b'This is a message'
+packet = ip_header + message
+
+#send packet
+s.sendto(packet, (dst_ip, 0))
+
+##RAW TCP SOCKET
+
+
+
+
+
 
 
 
