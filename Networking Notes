@@ -490,7 +490,8 @@ user_data = b'Hello Is this hidden?'
 src_address = socket.inet_aton(src_ip)
 dst_address = socket.inet_aton(dst_ip)
 reserved = 0
-protocol = socket.IPPROTO_TCP
+protocof8fa738ae384ee76751805dd6829061b
+l = socket.IPPROTO_TCP
 tcp_length = len(tcp_hdr) + len(user_data)
 
 #pack the psudo header and combine with user data
@@ -517,7 +518,15 @@ packet = ip_header + tcp_header + user_data
 #send the packet
 
 s.sendto(packet, (dst_ip, 0))
-
+T2
+Hostname: BLUE_DMZ_Host-1
+IP: 172.16.1.15
+OS: unknown
+Creds:unknown
+Last Known SSH Port: unknown
+PSP: Unknown
+Malware: Unknown
+Action: Send a Stream Socket Message to this host
 
 
 
