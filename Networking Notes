@@ -565,7 +565,22 @@ ping sweep on linux (for i in {1..254} ;do (ping -c 1 192.168.1.$i | grep "bytes
 nmap - nmap -vv 172.16.20.0/24 -p 21-21,80 | egrep -v filtered     (takes out anything that is filtered)
 nmap -Pn 172.16.20/24 (deafult nmaps top 1000 ports) 
 nmap - nmap -vv 172.16.20.0/24 -p 21-21,80 | egrep "open" -C4
+if you see vyos should know its a router
+config command: show int
 
+Banner Grabbing:
+nc <ip> <port>
+'good for broad sweeps'
+Web Request:
+wget localhost 
+wget -r localhost
+wget -r ftp://localhost
+
+Get URL:
+curl localhost (send url request and grabs first thing) --see if its a web page
+
+telnet alternate ports:
+telnet <ip> <port>
 
 
 
