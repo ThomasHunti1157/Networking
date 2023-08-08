@@ -531,9 +531,24 @@ PSP: Unknown
 Malware: Unknown
 Action: Send a Stream Socket Message to this host
 
+cat /etc/hosts
+cat/etc/resolv.conf
+netstat -ntulp    \   open ports
+ss -ntulp         /
 
+ps -elf  (running service procs
+who /w   (other users logged in
 
+ifconfig   \
+ip addr     >  Int ip's
+ip a       /
 
+arp -a    \
+ip neigh  >  arp cache
+ip n      /
+(drp) route 
+ip route
+ip r
 
 
 
