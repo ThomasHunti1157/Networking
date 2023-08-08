@@ -551,9 +551,20 @@ ip route
 ip r
 
 
+https://www.bestbuy.com/site/corsair-vengeance-i7400-gaming-desktop-intel-core-i7-13700k-32gb-ddr5-5600-mhz-memory-nvidia-geforce-rtx-4080-2tb-ssd-black/6539761.p?skuId=6539761
+https://www.bestbuy.com/site/cyberpowerpc-gamer-supreme-gaming-desktop-intel-core-i9-13900kf-32gb-memory-nvidia-geforce-rtx-4080-1tb-hdd-2tb-ssd-black/6523676.p?skuId=6523676
+https://www.bestbuy.com/site/cyberpowerpc-gamer-supreme-gaming-desktop-amd-ryzen-9-7900x-32gb-memory-nvidia-geforce-rtx-4080-1tb-ssd-black/6526066.p?skuId=6526066
 
+**to get to outside router must use a float ip to access router
+go to port on device must got to the loopback 
+ (ports get opened up on your loopback such as 22 21 80)
+0.0.0.0 (quad 0's) think as wildcards accepts any ip address 
 
-
+login to a router use vyos as username (172.16.20.1 for instance)
+ping sweep on linux (for i in {1..254} ;do (ping -c 1 192.168.1.$i | grep "bytes from" &) ;done)
+nmap - nmap -vv 172.16.20.0/24 -p 21-21,80 | egrep -v filtered     (takes out anything that is filtered)
+nmap -Pn 172.16.20/24 (deafult nmaps top 1000 ports) 
+nmap - nmap -vv 172.16.20.0/24 -p 21-21,80 | egrep "open" -C4
 
 
 
