@@ -772,9 +772,44 @@ You can also listen using the -e with NETCAT.
 
 nc -l -p <any unfiltered port> -e /bin/bash
 
+##SSH TUNNELING/PORT FORWARDING
 
+*you can tunnel other services through ssh including unsecure ones
 
+remote port forward opens port on remote machine
+local port forward opens port on local machine
 
+**SSH Local Port Forwarding
+
+    Syntax
+
+ssh -p <optional alt port> <user>@<pivot ip> -L <local bind port>:<tgt ip>:<tgt port> -NT (non interactive no terminal)
+
+or
+
+ssh -L <local bind port>:<tgt ip>:<tgt port> -p <alt port> <user>@<pivot ip> -NT (non interactive no terminal)
+
+can use ssh to encrypt a normal http connection
+
+Port Numbering Convention: 
+port starts with 4, student number determine snext two (41900-41999)
+
+Examples:
+IH -> Tobias -> Colby -> Steve
+
+1.
+(new session)
+ssh -L 41901:127.0.0.1:80 user@tobiashost -NT (command sent to tobias host)
+wget -r 127.0.0.1:41901
+2.
+(new session)
+ssh tobias@tobias -L 41901:colbyip:22 -NT
+ssh -p 41901 colby@127.0.0.1
+
+    -anytime opening or binding a port using port forwarding always bound to loopback address
+ssh -p 41901 colby@127.0.0.1 -L 41902:steve:25 -NT
+telnet 127.0.0.1 41901
+3.
 
 
 
