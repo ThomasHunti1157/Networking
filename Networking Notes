@@ -856,6 +856,21 @@ Syntax:
 ssh -D <port> -p <alt port> <user>@<pivot ip> -NT
 
 
+Entry Float IP: 10.50.43.190
+
+Task 3 - Donovian Tunnels Training: dig_dug_dig_dug
+
+    Your Network Number is N (Given by Instructor)
+
+    Credentials: net{N}_studentX:passwordX
+
+    X is your student number
+
+    T3 (Atropia) Float IP address is - 10.50.42.216
+
+
+    T4 (Pineland) Float IP address is - 10.50.44.211 (Note - You can only telnet here to act as an insider, this will not be a routed path)
+
 
 
 
