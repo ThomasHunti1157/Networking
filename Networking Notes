@@ -793,9 +793,11 @@ can use ssh to encrypt a normal http connection
 
 Port Numbering Convention: 
 port starts with 4, student number determine snext two (41900-41999)
-
+    -anytime opening or binding a port using port forwarding always bound to loopback address
 Examples:
-IH -> Tobias -> Colby -> Steve
+IH -> Tobias -> Colby -> Steve -> Bart -> dj
+
+Local Port Forwarding
 
 1.
 (new session)
@@ -803,13 +805,36 @@ ssh -L 41901:127.0.0.1:80 user@tobiashost -NT (command sent to tobias host)
 wget -r 127.0.0.1:41901
 2.
 (new session)
-ssh tobias@tobias -L 41901:colbyip:22 -NT
-ssh -p 41901 colby@127.0.0.1
+IH > ssh tobias@tobias -L 41901:colbyip:22 -NT
+IH > ssh -p 41901 colby@127.0.0.1  -test colby connection
+IH > ssh -p 41901 colby@127.0.0.1 -L 41902:steve:25 -NT
+IH > telnet 127.0.0.1 41901  -test steves connection
+(port 22 filtered on steve and theres another host)
+    Continues with remote port forwarding
+Steve > ssh colby@colbyhost -R 41999:127.0.0.1:22 -NT
+IH > ssh -p 41901 colby@127.0.0.1 -L 41903:127.0.0.1:41999 -NT
+IH > ssh -p 41903 steve@127.0.0.1
+Steve > ssh steve@127.0.0.1 -R 41998:dj:25 -NT
+Steve > telnet 127.0.0.1 41998
+IH > ssh -p 41903 steve@127.0.0.1 -L 41904:127.0.0.1:41998 -NT
+IH > telnet 127.0.0.1 41904
+Remote Port Forwarding
 
-    -anytime opening or binding a port using port forwarding always bound to loopback address
-ssh -p 41901 colby@127.0.0.1 -L 41902:steve:25 -NT
-telnet 127.0.0.1 41901
-3.
+allows to open a port on the remote system to forward trafic
+
+Remote Forward Sybtax: 
+ssh -p <optional alt port> <user>@<remote ip> -R <remote bind port>:<tgt ip>:<tgt port> -NT
+
+or
+
+ssh -R <remote bind port>:<tgt ip>:<tgt port> -p <alt port> <user>@<remote ip> -NT
+
+Dynamic Port Forwarding:
+
+
+
+
+
 
 
 
