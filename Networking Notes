@@ -818,6 +818,23 @@ Steve > ssh steve@127.0.0.1 -R 41998:dj:25 -NT
 Steve > telnet 127.0.0.1 41998
 IH > ssh -p 41903 steve@127.0.0.1 -L 41904:127.0.0.1:41998 -NT
 IH > telnet 127.0.0.1 41904
+    Continued with Dynamic port forwarding
+IH > ssh -p 41903 steve@127.0.0.1 -D 9050 -NT
+IH > proxychains wget -r 127.0.0.1
+IH > proxychains nmap -Pn <bartsip>
+IH > proxychains wget -r ftp://Bart
+IH > proxychains wget -r Bart
+IH > proxychains telnet Bart
+Steve > ssh colby@colby -p 41997:bart:23 -NT
+Colby > telnet 127.0.0.1 41997
+IH> ssh -p 41901 colby@127.0.0.1 -L 41905:127.0.0.1:41997 -NT
+IH > telnet 127.0.0.1 41905
+Bart > ssh steve@stevehost -R 41996:127.0.0.1:22 -NT
+IH > ssh -p 41903 steve@127.0.0.1 -L 41906:127.0.0.1:41996 -NT
+IH > ssh -p 41906 Bart@127.0.0.1 -D 9050 -NT
+IH > proxychains nmap -Pn joshhost
+
+
 Remote Port Forwarding
 
 allows to open a port on the remote system to forward trafic
@@ -831,6 +848,12 @@ ssh -R <remote bind port>:<tgt ip>:<tgt port> -p <alt port> <user>@<remote ip> -
 
 Dynamic Port Forwarding:
 
+allows the use of scripts and other userspace programs through tunnel
+
+tool called proxy chain send tcp based traffic to configured port, and tcp traffic thaytcomes out to any tcp service port will come out. 
+(allows you to use nmap scans through a proxy chain on other hosts)
+Syntax:
+ssh -D <port> -p <alt port> <user>@<pivot ip> -NT
 
 
 
