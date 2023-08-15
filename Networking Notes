@@ -912,7 +912,70 @@ mismatched protocols
 unusual traffic
 large amounts of traffic with unusual times
 
+##NETWORK FILTERING
+(firewall side of things)
+Host and Network filtering are two different things
 
+Prac app for filtering:
+emial addresses for spam (Layer 7)
+computer applications
+mac filtering for known computers (layer 2)
+network traffic
+
+Reasons:
+can decrease load on infrastrcutre
+ensure eficient data flow
+ensure intended recipients
+obfuscate network internals
+lead to another network before reaching internals to prevent mitigate damage and hide behind layers
+
+Devices:
+
+Switch (layer 2 and 3)
+Router (layer 3 and 4)
+Proxies (layer 3-7)
+IDS (layers 3-7)
+Host Based Firewall (layers 3-7)
+Network Firewall (layers 3-7)
+
+Concepts :
+Whitelist (implicit deny) vs Blacklist (let everything in)
+
+default implicit and explicit rules
+Network device operation modes:
+    Routed
+    Transparent (doesnt allow or route but can filter ussualy layer 2)
+
+Concepts:
+Intrusion defense
+    IDS - 
+    IPS - 
+filtering device placement
+firewall filtering methods
+    stateless packet filtering (layer 3+4)
+    stateful inspection (layer 4)
+    application layer (Layer 7)
+
+A: First part of network before entering PLACE A FIREWALL OR ACL'S
+B or D: IPS on the line  
+G or H: IDS off the line (not filtering all the traffic just observing) 
+J: Proxy for anything from ssh to telnet or other service, want a service deeper in your network but access from the outside (has to go through the proxy to reach out to the inernet) 
+E and F: Firewall in case an internal breach happens protect lan 1 from lan 2
+
+
+**use port forwarding to switch ports once through the internet
+
+
+traffic direction:
+    Traffic originating from the localhost to the remote-host
+
+    Return traffic from that remote-host back to the localhost.
+
+    Traffic originating from the remote-host to the localhost
+
+    Return traffic from the localhost back to the remote-host.
+
+##Host Based Filtering
 
 
 
