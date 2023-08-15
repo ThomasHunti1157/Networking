@@ -1142,6 +1142,8 @@ sudo nft add rule ip TEST INPUT tcp sport {22, 6010, 6011, 6012} ct state {new, 
 
 sudo nft flush table ip TEST
 
+**DO NOT CONFIGURE INTERNET HOST
+
 
 
 
