@@ -871,6 +871,99 @@ Task 3 - Donovian Tunnels Training: dig_dug_dig_dug
 
     T4 (Pineland) Float IP address is - 10.50.44.211 (Note - You can only telnet here to act as an insider, this will not be a routed path)
 
+##NETWORK ANALYSIS
+
+data types: 
+full packet capture  data
+session data 
+sflow
+netlow
+statistical data
+packet string data
+alert data (something that was not expected)
+log data (something that was already expected)
+
+Data collection devices:
+    Sensors : (In Line and Passive)
+
+
+
+Methods of Data Collection:
+TAP (direct connection)
+SPAN (setup on switch routers) (copies and forwards info out another port)
+ARP Spoofing (MitM) 
+
+Anomaly detection:
+Indicators ofAttack (IOA)
+proactive 
+focus on the intent 
+
+Indicator of compromise (IOC)
+Reactive
+forensic evidence
+provides information that can change
+
+Indicators:
+executable files
+NOP sled
+repeated letters
+well known signatures
+mismatched protocols
+unusual traffic
+large amounts of traffic with unusual times
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
