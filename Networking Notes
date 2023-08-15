@@ -1145,7 +1145,44 @@ sudo nft flush table ip TEST
 **DO NOT CONFIGURE INTERNET HOST
 
 
+NAT:
 
+snat (source nat) done on postrouting input
+dnat(destination nat) prerouting output
+
+Source NAT w/ IPTABLES:
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 1.1.1.1
+
+Destination NAT w/ IPTABLES:
+iptables -t nat -A PREROUTING -i eth0 -j DNAT --to 10.0.0.1
+
+Source PAT w/IPTABLES:
+iptables -t nat -A POSTROUTING -p tcp -o eth0 -j SNAT --to 1.1.1.1:9001
+
+Destination PAT w/IPTABLES:
+iptables -t nat -A PREROUTING -p tcp -i eth0 -j DNAT --to 10.0.0.1:8080
+
+Masquerade: change ip address before routing
+
+**NAT is done at the pivot not the ip its comig from
+
+Create the NAT rules:
+
+    Source NAT
+
+    nft add rule ip NAT POSTROUTING ip saddr 10.1.0.2 oif eth0 snat 144.15.60.11
+
+    Destination NAT
+
+    nft add rule ip NAT PREROUTING iif eth0 tcp dport { 80, 443 } dnat 10.1.0.3
+
+    Source NAT w/ masquerade
+
+    nft add rule ip NAT POSTROUTING ip saddr 10.1.0.0/24 oif eth0 masquerade
+
+    Destination NAT (port forwarding) with redirect
+
+    nft add rule ip NAT PREROUTING tcp dport 80 redirect to 8080
 
 
 
