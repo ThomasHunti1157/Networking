@@ -1085,11 +1085,34 @@ nftable families
     netdev - allows for user classification of packets - nftables passes up to the networking stack
     (no counterpart in iptables)
 
-Please follow along in your VMs
-8.6
 iptables syntaxiptables -t [table] -A [chain] [rules] -j [action] Rules: -i or -o [iface] -s or -d [ip.add | network/mask] -p [protocol(in ipv4 header)] -m is used with: state --state [state] mac [--mac-source | --mac-destination] [mac] tcp | udp [--dport | --sport] [port | port1:port2] multiport [--sports | --dports | --ports] [port1,[port2,[port3:port15]]] bpf --bytecode [ 'bytecode' ] [action] - ACCEPT, REJECT, DROP
 
+Syntax Example:
+sudo iptables -I INPUT -p tcp --dport 22 -j ACCEPT (allow ssh to server)
+sudo iptables -I OUTPUT -p tcp --sport 22 -j ACCEPT (allow ssh back to you)
+sudo iptables -P INPUT DROP (will change to a whitelist and default to drop all traffic)
 
+Allow terminator access:
+
+sudo iptables -I INPUT -p tcp -m multiport --ports 6010,6011,6012 -j ACCEPT
+sudo iptables -I OUTPUT -p tcp -m multiport --ports 6010,6011,6012 -j ACCEPT
+
+Only allow new and established connection through http
+
+sudo iptables -A INPUT -p tcp -m multiport --ports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp -m multiport --ports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+Allow pinging from this host:
+
+sudo iptables -I OUTPUT -s 10.10.0.40 -p ICMP -m icmp --icmp-type 8 -j ACCEPT
+sudo iptables -I OUTPUT -s 10.10.0.40 -p ICMP -m icmp --icmp-type 0 -j ACCEPT
+sudo iptables -I INPUT -d 10.10.0.40 -p ICMP -m icmp --icmp-type 0 -j ACCEPT
+sudo iptables -I INPUT -d 10.10.0.40 -p ICMP -m icmp --icmp-type 8 -j ACCEPT
+
+find list numbers to delete or reference:
+
+sudo iptables -L -n --line-number
+sudo iptables -D INPUT 4
 
 
 
