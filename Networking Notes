@@ -1114,6 +1114,33 @@ find list numbers to delete or reference:
 sudo iptables -L -n --line-number
 sudo iptables -D INPUT 4
 
+NFTABLES:
+
+netdev: similar to a hook netdev hooks on ingress
+
+Chain types:
+filter    -
+route    - 
+nat    - 
+
+Table Creation:
+
+sudo nft add table ip TEST
+Create chains:
+sudo nft add chain ip TEST OUTPUT { type filter hook output priority 0\; policy accept\; }
+sudo nft add chain ip TEST INPUT { type filter hook input priority 0\; policy accept\; }
+
+List rules:
+sudo nft list ruleset
+
+**case sensitive
+sudo nft add rule ip TEST OUTPUT tcp dport {22, 6010, 6011, 6012} ct state {new, established} accept
+sudo nft add rule ip TEST INPUT tcp dport {22, 6010, 6011, 6012} ct state {new, established} accept
+
+sudo nft add rule ip TEST OUTPUT tcp sport {22, 6010, 6011, 6012} ct state {new, established} accept
+sudo nft add rule ip TEST INPUT tcp sport {22, 6010, 6011, 6012} ct state {new, established} accept
+
+sudo nft flush table ip TEST
 
 
 
