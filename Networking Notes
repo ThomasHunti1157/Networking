@@ -1011,6 +1011,83 @@ Pre-Routing- change destination ip (if changes at post already sent out the wron
 
 Configuring IP Tables:
 
+Netfilter paradigm
+
+    tables - contain chains
+
+    chains - contain rules
+
+    rules - dictate what to match and what actions to perform on packets when packets match a rule
+
+
+IPtables
+Common iptable options
+T51 iptables options
+iptables syntax
+
+iptables -t [table] -A [chain] [rules] -j [action]
+
+Rules:
+
+-i or -o [iface]
+-s or -d [ip.add | network/mask]
+-p [protocol(in ipv4 header)]
+
+-m is used with:
+  state --state [state]
+  mac [--mac-source | --mac-destination] [mac]
+  tcp | udp [--dport | --sport] [port | port1:port2]
+  multiport [--sports | --dports | --ports]
+                [port1,[port2,[port3:port15]]]
+  bpf --bytecode [ 'bytecode' ]
+
+[action] - ACCEPT, REJECT, DROP
+
+Modify iptables
+
+    Flush table
+
+    iptables -t [table] -F
+
+    Change default policy
+
+    iptables -t [table] -P [chain] [action]
+
+    Lists rules with rule numbers
+
+    iptables -t [table] -L --line-numbers
+
+    Lists rules as commands interpreted by the system
+
+    iptables -t [table] -S
+
+    Inserts rule before Rule number
+
+    iptables -t [table] -I [chain] [rule num] [rules] -j [action]
+
+    Deletes rule at number
+
+    iptables -t [table] -D [chain] [rule num]
+
+Configuring nftables
+nftable families
+
+    ip - IPv4 packets
+
+    ip6 - IPv6 packets
+
+    inet - IPv4 and IPv6 packets
+
+    arp - layer 2
+
+    bridge - processing traffic/packets traversing bridges.
+
+    netdev - allows for user classification of packets - nftables passes up to the networking stack
+    (no counterpart in iptables)
+
+Please follow along in your VMs
+8.6
+iptables syntaxiptables -t [table] -A [chain] [rules] -j [action] Rules: -i or -o [iface] -s or -d [ip.add | network/mask] -p [protocol(in ipv4 header)] -m is used with: state --state [state] mac [--mac-source | --mac-destination] [mac] tcp | udp [--dport | --sport] [port | port1:port2] multiport [--sports | --dports | --ports] [port1,[port2,[port3:port15]]] bpf --bytecode [ 'bytecode' ] [action] - ACCEPT, REJECT, DROP
 
 
 
