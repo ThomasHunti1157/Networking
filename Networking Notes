@@ -1292,7 +1292,7 @@ Snort IDS/IPS Thresholding and suppression options:
 
     seconds [seconds] - time period over which count is accrued. [s] must be nonzero value
 
-**Examples:
+**Examples:137 138
 
     Look for anonymous ftp traffic:
 
@@ -1329,10 +1329,26 @@ red snort log:
 sudo tcpdump -vvXntr /var/log/snort/snort.log.<number>
 sudo tcpdump -ntr /var/log/snort/snort.log.<number> | awk '{print $2}' 
 sudo tcpdump -ntr /var/log/snort/snort.log.<number> | awk '{print $2}' | sort | sed 's/:$//' | uniq -c
-sudo snort -r /var/log/snort/snort.log.<number
+sudo snort -r /var/log/snort/snort.log.<number -c /etc/snort/rules/<rule file> (what it hits on)
+sudo snort -r home/activity_resources/ids.pcap -c /etc/snort/rules/icmp.rules (will run snort rules against pcap)
+
+Action Stats will reveal whether it is hitting on the rules
+
+Rule Examples:
+alert icmp any any -> any any (msg:" for nerds";sid:2000000;content:"IDSRuleCheck";rev:1;)
 
 
+Task 3: Signatures (Snort)
 
+    START FLAG: this_whole_ids_is_out_of_line
+
+    T4 Snort Server (Bob): 10.50.44.119
+
+    Login Credentials: netN_studentX:passwordX (N=net number and X=student number)
+
+    Alt SSH Port: 25
+
+    * DO NOT CREATE YOUR RULES ON THIS SYSTEM * 
 
 
 
