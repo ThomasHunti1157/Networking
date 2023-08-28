@@ -888,6 +888,7 @@ Data collection devices:
 
 
 
+
 Methods of Data Collection:
 TAP (direct connection)
 SPAN (setup on switch routers) (copies and forwards info out another port)
